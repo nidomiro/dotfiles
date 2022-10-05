@@ -1,0 +1,25 @@
+[user]
+	name = Niclas Roßberger
+	signingkey = 0x517409C225FEE5BB
+	email = niclas@nidomiro.de
+
+[alias]
+	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar %C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	graph = log --graph --decorate '--pretty=format:%C(auto)%h%d - %C(dim cyan)(%ar)%C(reset) %s %C(dim magenta)(%an)%Creset'
+	g = log --graph --decorate '--pretty=format:%C(auto)%h%d - %C(dim cyan)(%ar)%C(reset) %s %C(dim magenta)(%an)%Creset' --all
+	co = checkout
+	me = merge
+
+[core]
+	commentChar = auto
+	autoclrf = input
+	autocrlf = input
+
+[pull]
+	rebase = false
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
+[init]
+	defaultBranch = main
