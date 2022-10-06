@@ -13,10 +13,10 @@
 [core]
 	commentChar = auto
 	autoclrf = input
-	autocrlf = input
+	excludesfile = ~/.gitignore
 
 [pull]
-	rebase = false
+	rebase = true
 [commit]
 	gpgsign = true
 [tag]
