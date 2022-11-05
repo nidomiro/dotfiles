@@ -28,16 +28,16 @@ fi
 
 
 # load custom extensions / commands
-source .shell/common.sh
+source "$HOME/.shell/common.sh"
 
 SYSTEM_TYPE="$(uname -s)"
 case "${SYSTEM_TYPE}" in
     Linux*)
-    source .shell/linux.sh
+    source "$HOME/.shell/linux.sh"
     ;;
 
     Darwin*)
-    source .shell/macos.sh
+    source "$HOME/.shell/macos.sh"
     ;;
 
     *)
