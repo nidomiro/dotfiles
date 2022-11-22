@@ -10,3 +10,12 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 source $(brew --prefix nvm)/nvm.sh
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# JDK
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include $CPPFLAGS"
+
+# LLVM
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib $LDFLAGS"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include $CPPFLAGS"
