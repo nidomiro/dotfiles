@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
 # gpg
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+export SSH_AUTH_SOCK
 gpgconf --launch gpg-agent
 
 
@@ -18,3 +19,5 @@ alias l='ls -CF'
 if [ -d "$HOME/Android/Sdk/platform-tools" ] ; then
     PATH="$HOME/Android/Sdk/platform-tools:$PATH"
 fi
+
+. "$HOME/.cargo/env"
