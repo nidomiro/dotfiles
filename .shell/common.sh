@@ -1,5 +1,10 @@
 #!/usr/bin/env sh
 
+if [ -f "$HOME/.shell/secrets.sh" ]
+then
+    source "$HOME/.shell/secrets.sh"
+fi
+
 # gpg
 SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export SSH_AUTH_SOCK
