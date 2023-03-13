@@ -25,4 +25,7 @@ if [ -d "$HOME/Android/Sdk/platform-tools" ] ; then
     PATH="$HOME/Android/Sdk/platform-tools:$PATH"
 fi
 
-. "$HOME/.cargo/env"
+if [ -f "$HOME/.cargo/env" ]
+then
+    source "$HOME/.cargo/env"
+fi
