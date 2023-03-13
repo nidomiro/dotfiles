@@ -27,9 +27,6 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 
-# load custom extensions / commands
-source "$HOME/.shell/common.sh"
-
 SYSTEM_TYPE="$(uname -s)"
 case "${SYSTEM_TYPE}" in
     Linux*)

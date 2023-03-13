@@ -19,3 +19,6 @@ export CPPFLAGS="-I/opt/homebrew/opt/openjdk@17/include $CPPFLAGS"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib $LDFLAGS"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include $CPPFLAGS"
+
+# load custom extensions / commands
+source "$HOME/.shell/common.sh"
