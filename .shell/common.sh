@@ -29,3 +29,21 @@ if [ -f "$HOME/.cargo/env" ]
 then
     source "$HOME/.cargo/env"
 fi
+
+
+if ! command -v brew &> /dev/null
+then
+    CURRENT_SHELL="$0"
+    if [ "${CURRENT_SHELL##*bash*}" ]; then
+        source "$(brew --prefix)/share/google-cloud-sdk/path.bash.inc"
+    fi
+
+    if [ "${CURRENT_SHELL##*zsh*}" ]; then
+        source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+        source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+    fi
+
+fi
+
+
+
