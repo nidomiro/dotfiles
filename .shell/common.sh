@@ -2,7 +2,7 @@
 
 if [ -f "$HOME/.shell/secrets.sh" ]
 then
-    source "$HOME/.shell/secrets.sh"
+    . "$HOME/.shell/secrets.sh"
 fi
 
 # gpg
@@ -27,7 +27,7 @@ fi
 
 if [ -f "$HOME/.cargo/env" ]
 then
-    source "$HOME/.cargo/env"
+    . "$HOME/.cargo/env"
 fi
 
 
@@ -35,15 +35,27 @@ if ! command -v brew &> /dev/null
 then
     CURRENT_SHELL="$0"
     if [ "${CURRENT_SHELL##*bash*}" ]; then
-        source "$(brew --prefix)/share/google-cloud-sdk/path.bash.inc"
+        . "$(brew --prefix)/share/google-cloud-sdk/path.bash.inc"
     fi
 
     if [ "${CURRENT_SHELL##*zsh*}" ]; then
-        source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-        source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+        . "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+        . "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
     fi
 
 fi
+
+# nx aliases
+alias nx-test-all='nx run-many --target=test --all'
+alias nx-test-affected='nx affected:test'
+
+alias nx-lint-all='nx run-many --target=lint --all'
+alias nx-lint-affected='nx affected:lint'
+
+alias nx-type-check-all='nx run-many --target=type-check --all'
+alias nx-type-check-affected='nx affected:type-check'
+
+
 
 
 

@@ -2,6 +2,7 @@
 
 # Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# shellcheck disable=SC2091
 $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 
@@ -16,4 +17,4 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 
 # load custom extensions / commands
-source "$HOME/.shell/common.sh"
+. "$HOME/.shell/common.sh"
