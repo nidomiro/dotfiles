@@ -30,11 +30,11 @@ fi
 SYSTEM_TYPE="$(uname -s)"
 case "${SYSTEM_TYPE}" in
     Linux*)
-    source "$HOME/.shell/linux.sh"
+    . "$HOME/.shell/linux.sh"
     ;;
 
     Darwin*)
-    source "$HOME/.shell/macos.sh"
+    . "$HOME/.shell/macos.sh"
     ;;
 
     *)
