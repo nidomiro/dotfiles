@@ -47,13 +47,13 @@ fi
 
 # nx aliases
 alias nx-test-all='nx run-many --target=test --all'
-alias nx-test-affected='nx affected:test'
+alias nx-test-affected='nx affected --target=test'
 
 alias nx-lint-all='nx run-many --target=lint --all'
-alias nx-lint-affected='nx affected:lint'
+alias nx-lint-affected='nx affected --target=lint'
 
 alias nx-type-check-all='nx run-many --target=type-check --all'
-alias nx-type-check-affected='nx affected:type-check'
+alias nx-type-check-affected='nx affected --target=type-check'
 
 
 
