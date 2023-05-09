@@ -55,6 +55,12 @@ alias nx-lint-affected='nx affected --target=lint'
 alias nx-type-check-all='nx run-many --target=type-check --all'
 alias nx-type-check-affected='nx affected --target=type-check'
 
+alias nx-build-all='nx run-many --target=build --all'
+alias nx-build-affected='nx affected --target=build'
+
+alias nx-build-all-production='nx run-many --target=build --all --configuration=production'
+alias nx-build-affected-production='nx affected --target=build --configuration=production'
+
 
 
 
