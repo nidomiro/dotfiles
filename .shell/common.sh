@@ -49,6 +49,11 @@ fi
 alias nx-test-all='nx run-many --target=test --all'
 alias nx-test-affected='nx affected --target=test'
 
+alias nx-test-int-all='nx run-many --target=test-int --all'
+alias nx-int-test-all='nx-test-int-all'
+alias nx-test-int-affected='nx affected --target=test-int'
+alias nx-int-test-affected='nx-test-int-affected'
+
 alias nx-lint-all='nx run-many --target=lint --all'
 alias nx-lint-affected='nx affected --target=lint'
 
