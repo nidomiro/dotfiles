@@ -40,3 +40,5 @@ case "${SYSTEM_TYPE}" in
     *)
     echo "Unsupported system: ${SYSTEM_TYPE}"
 esac
+
+export PROFILE_LOADED=1
