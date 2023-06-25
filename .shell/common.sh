@@ -27,8 +27,7 @@ then
 fi
 
 
-if ! command -v brew &> /dev/null
-then
+if command -v brew &> /dev/null; then
     CURRENT_SHELL="$0"
     if [ "${CURRENT_SHELL##*bash*}" ]; then
         . "$(brew --prefix)/share/google-cloud-sdk/path.bash.inc"
@@ -40,10 +39,4 @@ then
     fi
 
 fi
-
-
-. "$HOME/.shell/common.sh"
-
-
-
 

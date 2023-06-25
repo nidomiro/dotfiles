@@ -1,9 +1,14 @@
 #!/usr/bin/env sh
 
-# Set PATH, MANPATH, etc., for Homebrew.
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-# shellcheck disable=SC2091
-$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+if [ -d "$HOME/.linuxbrew/bin" ]; then
+    # Set PATH, MANPATH, etc., for Homebrew.
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    # shellcheck disable=SC2091
+    $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    export PROFILE_HOMEBREW_LOADED=1
+fi
+
+
 
 
 # Configure nvm

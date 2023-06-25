@@ -1,3 +1,3 @@
-if [ "$PROFILE_LOADED" !=1 ]; then
+if [ "$PROFILE_LOADED" != 1 ]; then
 	. ~/.profile
 fi
