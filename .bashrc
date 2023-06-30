@@ -18,3 +18,5 @@ fi
 unset rc
 
 . $HOME/.shell/aliases.sh
+
+echo UPDATESTARTUPTTY | gpg-connect-agent # GPG SSH "agent refused operation" fix

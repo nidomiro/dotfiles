@@ -25,3 +25,6 @@ alias nx-build-all-production='nx run-many --target=build --all --configuration=
 alias nx-build-affected-production='nx affected --target=build --configuration=production'
 
 alias nx-auto-generate-mms="npx nx run mint-postman-cli:generate-all-collections && npx nx run mint-postman-cli:cli --job=\"combine-full-dump\" && npx nx affected --target=generate-ocd-runbook --exclude=mint-exceptions && echo \"### Don't forget to update the postman tests if the collection changed! ###\""
+
+
+alias nx-check-all-affected='nx affected --targets=build,type-check,lint,test,test-int --parallel --maxParallel=9'
