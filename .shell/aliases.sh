@@ -28,3 +28,5 @@ alias nx-auto-generate-mms="npx nx run mint-postman-cli:generate-all-collections
 
 
 alias nx-check-all-affected='nx affected --targets=build,type-check,lint,test,test-int --parallel --maxParallel=9'
+alias nx-check-all='nx run-many --all --targets=build,type-check,lint,test,test-int --parallel --maxParallel=9'
+
