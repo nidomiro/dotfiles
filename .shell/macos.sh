@@ -22,3 +22,5 @@ export CPPFLAGS="-I/opt/homebrew/opt/llvm/include $CPPFLAGS"
 
 # load custom extensions / commands
 source "$HOME/.shell/common.sh"
+
+gpg-connect-agent updatestartuptty /bye
