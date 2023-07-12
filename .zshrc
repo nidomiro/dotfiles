@@ -19,6 +19,7 @@ fi
 
 
 #### BEGIN KeyBinding
+# Copied from https://wiki.archlinux.org/title/Zsh#Key_bindings
 
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
