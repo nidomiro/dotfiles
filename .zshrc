@@ -68,6 +68,20 @@ fi
 
 #### END KeyBinding
 
+#bindkey $terminfo[kLFT5] backward-word
+#bindkey $terminfo[kRIT5] forward-word
+
+# ⌥←
+bindkey "\e[1;3D" backward-word
+# ⌥→
+bindkey "\e[1;3C" forward-word
+# cmd+←
+bindkey "^[[1;9D" beginning-of-line
+# cmd+→
+bindkey "^[[1;9C" end-of-line
+
+
+
 
 
 
