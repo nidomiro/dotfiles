@@ -24,3 +24,7 @@ export CPPFLAGS="-I/opt/homebrew/opt/llvm/include $CPPFLAGS"
 source "$HOME/.shell/common.sh"
 
 gpg-connect-agent updatestartuptty /bye
+
+export DOCKER_HOST=unix://${HOME}/.colima/default/docker.sock
+export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+export NODE_OPTIONS=--dns-result-order=ipv4first
