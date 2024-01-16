@@ -18,12 +18,17 @@ switch (uname)
         
 end
 
+set --export NVM_DIR "$HOME/.nvm"
+source $(brew --prefix nvm)/nvm.sh
+
 
 
 
 
 # abbrieviations
 abbr --add ll ls -alFh
+
+abbr --add trigger-ci 'git pull && git commit --no-verify --allow-empty -m "trigger ci" && git push'
 
 ## nx abbreviations
 abbr --add nx-test-all nx run-many --target=test --all
