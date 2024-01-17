@@ -77,3 +77,10 @@ export GPG_TTY=$(tty)
 
 . $HOME/.shell/aliases.sh
 
+
+# bun completions
+[ -s "/home/niclas/.bun/_bun" ] && source "/home/niclas/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
