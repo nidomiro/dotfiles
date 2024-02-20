@@ -9,6 +9,8 @@
 	g = log --graph --decorate '--pretty=format:%C(auto)%h%d - %C(dim cyan)(%ar)%C(reset) %s %C(dim magenta)(%an)%Creset' --all
 	co = checkout
 	me = merge
+	# more safe force push => forcepush only if no changes are made in the remote
+	fpush = push
 
 [core]
 	commentChar = auto
@@ -23,3 +25,12 @@
 	gpgSign = true
 [init]
 	defaultBranch = main
+[rerere]
+	# record how I resolved mergeconflicts and automatically reapply them
+	enabled = true
+	# automatically stage those resolutions
+	autoUpdate = true
+[branch]
+	sort = -committerdate
+[maintenance]
+	repo = /Users/rossberger/workspace/MediaMarktSaturn/mint-root
