@@ -34,3 +34,5 @@
 	sort = -committerdate
 [maintenance]
 	repo = /Users/rossberger/workspace/MediaMarktSaturn/mint-root
+[push]
+	autoSetupRemote = true
