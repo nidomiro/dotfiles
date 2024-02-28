@@ -5,6 +5,9 @@ then
     . "$HOME/.shell/secrets.sh"
 fi
 
+# Mint specific
+export STRICT_LINTING=true
+
 # gpg
 SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export SSH_AUTH_SOCK
