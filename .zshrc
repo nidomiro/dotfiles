@@ -92,3 +92,5 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/nomad nomad

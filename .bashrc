@@ -20,3 +20,5 @@ unset rc
 . $HOME/.shell/aliases.sh
 
 echo UPDATESTARTUPTTY | gpg-connect-agent # GPG SSH "agent refused operation" fix
+
+complete -C /usr/bin/nomad nomad
