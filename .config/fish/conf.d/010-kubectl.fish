@@ -1,0 +1,2 @@
+
+abbr --add k 'kubectl'
