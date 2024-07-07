@@ -12,6 +12,8 @@
 	# more safe force push => forcepush only if no changes are made in the remote
 	fpush = push
 
+	spull = "!git stash && git pull && git stash pop"
+
 [core]
 	commentChar = auto
 	autoclrf = input
