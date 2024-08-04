@@ -1,6 +1,6 @@
 
 
-if test (which brew)
+if test (which brew > /dev/null 2>&1)
     set --export GCLOUD_SDK_PATH "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
 end
 
