@@ -7,3 +7,6 @@ abbr --add g 'git'
 abbr --add gru 'git remote update'
 
 
+abbr --add gpgh 'git push github'
+
+
