@@ -18,6 +18,7 @@
 	commentChar = auto
 	autoclrf = input
 	excludesfile = ~/.gitignore
+	editor = vim
 
 [pull]
 	rebase = true
@@ -34,7 +35,5 @@
 	autoUpdate = true
 [branch]
 	sort = -committerdate
-[maintenance]
-	repo = /Users/rossberger/workspace/MediaMarktSaturn/mint-root
 [push]
 	autoSetupRemote = true
