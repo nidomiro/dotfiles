@@ -3,7 +3,7 @@
 
 switch (uname)
     case Darwin
-        set -x PATH "/Users/rossberger/Library/Application Support/fnm" $PATH
+        set -x PATH "$HOME/Library/Application Support/fnm" $PATH
     case Linux
         set -x PATH "$HOME/.local/share/fnm" $PATH
 end

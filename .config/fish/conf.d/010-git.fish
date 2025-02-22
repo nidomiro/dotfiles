@@ -5,8 +5,9 @@ abbr --add trigger-ci 'git pull && git commit --no-verify --allow-empty -m "trig
 abbr --add g 'git'
 
 abbr --add gru 'git remote update'
-
-
+abbr --add gp 'git push'
 abbr --add gpgh 'git push github'
+
+
 
 
