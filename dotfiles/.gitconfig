@@ -37,3 +37,6 @@
 	sort = -committerdate
 [push]
 	autoSetupRemote = true
+
+[includeIf "gitdir:~/"]
+    path = ~/.gitconfig.local
