@@ -1,4 +1,6 @@
-
+if not type -q nx
+    return
+end
 
 
 ## nx abbreviations

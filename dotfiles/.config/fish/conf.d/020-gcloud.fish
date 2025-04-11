@@ -1,8 +1,10 @@
 
-
-if type -q brew
-    set --export GCLOUD_SDK_PATH "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
+if not type -q brew
+    return
 end
+
+set --export GCLOUD_SDK_PATH "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
+
 
 set GCLOUD_FISH_INCLUDE "$GCLOUD_SDK_PATH/path.fish.inc"
 

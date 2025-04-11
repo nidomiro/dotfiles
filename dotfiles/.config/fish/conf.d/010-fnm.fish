@@ -1,12 +1,14 @@
-# fnm
-# TODO: different path for linux and macOS
-
-switch (uname)
-    case Darwin
-        set -x PATH "$HOME/Library/Application Support/fnm" $PATH
-    case Linux
-        set -x PATH "$HOME/.local/share/fnm" $PATH
+if not type -q fnm
+    return
 end
 
 
-fnm env --use-on-cd  | source
+switch (uname)
+    case Darwin
+        add_to_path_if_exists "$HOME/Library/Application Support/fnm"
+    case Linux
+        add_to_path_if_exists "$HOME/.local/share/fnm"
+end
+
+
+fnm env --use-on-cd | source
