@@ -14,8 +14,6 @@ then
     . "$HOME/.bun/bin"
 fi
 
-~/.bun/bin
-
 # gpg
 SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export SSH_AUTH_SOCK
