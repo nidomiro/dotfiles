@@ -14,6 +14,9 @@
 
 	spull = "!git stash && git pull && git stash pop"
 
+	cowt = "!git-clone-worktree"
+	clonewt = "!git-clone-worktree"
+
 [core]
 	commentChar = auto
 	autoclrf = input

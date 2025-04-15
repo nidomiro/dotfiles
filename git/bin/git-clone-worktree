@@ -1,0 +1,52 @@
+#!/usr/bin/env fish
+
+# Exit on any error
+function on_error
+    echo "❌ An error occurred. Exiting."
+    exit 1
+end
+
+# Check if we have exactly two arguments
+if test (count $argv) -ne 2
+    echo "Usage: git-clone-worktree <git-clone-url> <folder-name>"
+    exit 1
+end
+
+set -l clone_url $argv[1]
+set -l folder_name $argv[2]
+
+# Check if the folder already exists
+if test -e $folder_name
+    if test (count (ls -A $folder_name)) -gt 0
+        echo "❌ Error: Folder '$folder_name' exists and is not empty. Please empty or remove it first."
+        exit 1
+    end
+end
+
+pwd
+# Step 1: Create the target folder and cd into it
+mkdir -p $folder_name || on_error
+cd $folder_name || on_error
+pwd
+
+
+# Step 2: Clone the repository as a bare repo into .bare
+git clone --bare $clone_url .bare || on_error
+
+# Step 3: Create .git file pointing to the bare repo
+echo "gitdir: ./.bare" >.git || on_error
+
+# Step 4: Configure fetch refspec
+git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' || on_error
+
+# Step 5: Fetch from remote
+git fetch || on_error
+
+# Step 6: Checkout worktree
+set -l branch_name main
+if not git show-ref --verify --quiet refs/remotes/origin/main
+    set -l branch_name master
+end
+
+# Create a worktree for the selected branch
+git worktree add $branch_name || on_error
