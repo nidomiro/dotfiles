@@ -4,4 +4,4 @@ end
 
 
 set -x GOPATH (go env GOPATH)
-set -x PATH $PATH $GOPATH/bin
+add_to_path_if_exists $GOPATH/bin
