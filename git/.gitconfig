@@ -12,7 +12,7 @@
 	# more safe force push => forcepush only if no changes are made in the remote
 	fpush = push
 
-	spull = "!git stash && git pull && git stash pop"
+	spull = "pull --autostash"
 
 	cowt = "!git-clone-worktree"
 	clonewt = "!git-clone-worktree"
