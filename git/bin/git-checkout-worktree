@@ -1,0 +1,70 @@
+#!/usr/bin/env fish
+
+function print_usage
+    echo "Usage: git-checkout-worktree [-b|--branch] <branch-name> [<folder-name>] [commitish-to-base-the-branch-on]"
+    echo "  -b, --branch                       create a new branch with the given name"
+    echo "  <branch-name>                      Specify the name of the branch to create/checkout."
+    echo "  <folder-name>                      Specify the folder name for the worktree."
+    echo "  [commitish-to-base-the-branch-on]  Specify the commitish to base the branch on."
+end
+
+function log 
+    set_color blue;
+    echo $argv
+    set_color normal;
+end
+
+argparse 'b/branch' -- $argv
+or begin
+    print_usage
+    exit 1
+end
+
+# Exit on any error
+function on_error
+    log "❌ An error occurred. Exiting."
+    exit 1
+end
+
+# Check if we have exactly two arguments
+if test (count $argv) -ne 1
+    print_usage
+    exit 1
+end
+
+set branch_name $argv[1]
+
+if test (count $argv) -eq 2
+    set folder_name $argv[2]
+else
+    set folder_name (string replace --all '/' '_' $branch_name)
+end
+
+if test (count $argv) -eq 3
+    set base_commitish $argv[3]
+else
+    set base_commitish (git rev-parse --abbrev-ref origin/HEAD || on_error)
+end
+
+
+if test -n "$_flag_b"
+    set create_branch true
+else
+    set create_branch false
+end
+
+# Check if the folder already exists
+if test -e $folder_name
+    if test (count (ls -A $folder_name)) -gt 0
+        log "❌ Error: Folder '$folder_name' exists and is not empty. Please empty or remove it first."
+        exit 1
+    end
+end
+
+if $create_branch == true
+    log "Creating a new branch '$branch_name' based on commitish '$base_commitish' and checking it out into the '$folder_name'"
+    git worktree add --no-track -b $branch_name $folder_name $base_commitish || on_error
+else
+    log "Checking out the existing branch '$branch_name' into '$folder_name'"
+    git worktree add  $folder_name $branch_name || on_error
+end

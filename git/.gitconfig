@@ -14,7 +14,7 @@
 
 	spull = "pull --autostash"
 
-	cowt = "!git-clone-worktree"
+	cowt = "!git-checkout-worktree"
 	clonewt = "!git-clone-worktree"
 
 [core]
