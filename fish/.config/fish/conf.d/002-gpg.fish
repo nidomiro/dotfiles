@@ -2,7 +2,7 @@ if not all_executables_exist gpg gpgconf gpg-agent gpg-connect-agent
     exit
 end
 
-set --export SSH_AUTH_SOCK "$(gpgconf --list-dirs agent-ssh-socket)"
+set --export SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent >/dev/null
 
 switch (uname)
