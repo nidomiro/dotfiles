@@ -1,5 +1,5 @@
 if not type -q nx
-    return
+    exit
 end
 
 

@@ -1,5 +1,5 @@
 if not type -q fnm
-    return
+    exit
 end
 
 

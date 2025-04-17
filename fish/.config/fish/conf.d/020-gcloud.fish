@@ -1,6 +1,6 @@
 
 if not type -q brew
-    return
+    exit
 end
 
 set --export GCLOUD_SDK_PATH "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"

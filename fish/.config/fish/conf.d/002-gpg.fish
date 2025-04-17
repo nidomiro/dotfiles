@@ -1,5 +1,5 @@
 if not all_executables_exist gpg gpgconf gpg-agent gpg-connect-agent
-    return
+    exit
 end
 
 set --export SSH_AUTH_SOCK "$(gpgconf --list-dirs agent-ssh-socket)"

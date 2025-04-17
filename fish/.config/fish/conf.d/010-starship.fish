@@ -1,5 +1,5 @@
 if not type -q starship
-    return
+    exit
 end
 
 starship init fish | source

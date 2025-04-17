@@ -1,5 +1,5 @@
 if not type -q go
-    return
+    exit
 end
 
 

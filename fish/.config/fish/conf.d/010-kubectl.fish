@@ -1,5 +1,5 @@
 if not type -q kubectl
-    return
+    exit
 end
 
 abbr --add k kubectl
