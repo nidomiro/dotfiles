@@ -14,6 +14,7 @@
 
 	spull = "pull --autostash"
 
+	wt = worktree
 	cowt = "!git-checkout-worktree"
 	clonewt = "!git-clone-worktree"
 
@@ -40,6 +41,9 @@
 	sort = -committerdate
 [push]
 	autoSetupRemote = true
+
+[worktree]
+	useRelativePaths = true
 
 [includeIf "gitdir:~/"]
     path = ~/.gitconfig.local

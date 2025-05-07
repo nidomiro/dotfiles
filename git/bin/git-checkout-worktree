@@ -63,8 +63,8 @@ end
 
 if $create_branch == true
     log "Creating a new branch '$branch_name' based on commitish '$base_commitish' and checking it out into the '$folder_name'"
-    git worktree add --no-track -b $branch_name $folder_name $base_commitish || on_error
+    git worktree add --relative-paths --no-track -b $branch_name $folder_name $base_commitish || on_error
 else
     log "Checking out the existing branch '$branch_name' into '$folder_name'"
-    git worktree add  $folder_name $branch_name || on_error
+    git worktree add --relative-paths  $folder_name $branch_name || on_error
 end
