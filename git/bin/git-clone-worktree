@@ -7,13 +7,19 @@ function on_error
 end
 
 # Check if we have exactly two arguments
-if test (count $argv) -ne 2
-    echo "Usage: git-clone-worktree <git-clone-url> <folder-name>"
+if test (count $argv) -lt 1
+    echo "Usage: git-clone-worktree <git-clone-url> [<folder-name>]"
     exit 1
 end
 
-set -l clone_url $argv[1]
-set -l folder_name $argv[2]
+set clone_url $argv[1]
+set folder_name $argv[2]
+if test -z $folder_name
+    # Extract the folder name from the clone URL
+    set folder_name (basename $clone_url .git)
+end
+
+echo "Cloning '$clone_url' into '$folder_name'..."
 
 # Check if the folder already exists
 if test -e $folder_name
