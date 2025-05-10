@@ -5,7 +5,7 @@ Execute in this directory:
 # Linux
 
 ```shell
-rm -rf ~/.config/fish/
+[ -d ~/.config/fish ] && [ ! -L ~/.config/fish ] && rm -rf ~/.config/fish
 stow -v -R -t ~ gpg-linux
 stow -v -R -t ~ shell-common
 stow -v -R -t ~ bash
@@ -16,7 +16,7 @@ stow -v -R -t ~ git
 # MacOS
 
 ```shell
-rm -rf ~/.config/fish/
+[ -d ~/.config/fish ] && [ ! -L ~/.config/fish ] && rm -rf ~/.config/fish
 stow -v -R -t ~ gpg-macos
 stow -v -R -t ~ shell-common
 stow -v -R -t ~ bash
