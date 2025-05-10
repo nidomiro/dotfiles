@@ -25,3 +25,9 @@ stow -v -R -t ~ git
 stow -v -R -t ~ zsh
 stow -v -R -t ~ macos
 ```
+
+# enable gpg-sign
+
+```shell
+stow -v -R -t ~ git-gpgsign
+```

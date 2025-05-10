@@ -1,6 +1,5 @@
 [user]
 	name = Niclas Roßberger
-	signingkey = 0x517409C225FEE5BB
 	email = niclas@nidomiro.de
 
 [alias]
@@ -27,7 +26,7 @@
 [pull]
 	rebase = true
 [commit]
-	gpgsign = true
+	gpgsign = false
 [tag]
 	gpgSign = true
 [init]
@@ -45,5 +44,5 @@
 [worktree]
 	useRelativePaths = true
 
-[includeIf "gitdir:~/"]
-    path = ~/.gitconfig.local
+[includeIf "gitdir:/"]
+    path = ~/.gitconfig.gpgsign
