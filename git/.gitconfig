@@ -28,7 +28,7 @@
 [commit]
 	gpgsign = false
 [tag]
-	gpgSign = true
+	gpgSign = false
 [init]
 	defaultBranch = main
 [rerere]
