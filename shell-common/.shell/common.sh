@@ -49,3 +49,5 @@ if command -v brew &> /dev/null; then
 
 fi
 
+export NX_TUI=false
+
