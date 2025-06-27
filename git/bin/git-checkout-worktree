@@ -3,6 +3,7 @@
 function print_usage
     echo "Usage: git-checkout-worktree [-b|--branch] <branch-name> [<folder-name>] [commitish-to-base-the-branch-on]"
     echo "  -b, --branch                       create a new branch with the given name"
+    echo "  -i, --install                      execute an install like 'pnpm install' in the new worktree (default: true)"
     echo "  <branch-name>                      Specify the name of the branch to create/checkout."
     echo "  <folder-name>                      Specify the folder name for the worktree."
     echo "  [commitish-to-base-the-branch-on]  Specify the commitish to base the branch on."
@@ -14,10 +15,21 @@ function log
     set_color normal;
 end
 
-argparse 'b/branch' -- $argv
+argparse 'b/branch' 'i/install' -- $argv
 or begin
     print_usage
     exit 1
+end
+
+# Set do_pnpm_install to true by default, unless --install=false is passed
+if set -q _flag_install
+    if test $_flag_install = "false"
+        set do_pnpm_install false
+    else
+        set do_pnpm_install true
+    end
+else
+    set do_pnpm_install true
 end
 
 # Exit on any error
@@ -67,4 +79,12 @@ if $create_branch == true
 else
     log "Checking out the existing branch '$branch_name' into '$folder_name'"
     git worktree add --relative-paths  $folder_name $branch_name || on_error
+end
+
+# Run pnpm install if pnpm-lock.yaml exists and do_pnpm_install is true
+if test $do_pnpm_install = true
+    if test -f "$folder_name/pnpm-lock.yaml"
+        log "Running pnpm install in $folder_name"
+        pnpm install --dir "$folder_name" || on_error
+    end
 end
