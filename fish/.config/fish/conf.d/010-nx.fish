@@ -24,8 +24,8 @@ abbr --add nx-build-affected nx affected --target=build
 abbr --add nx-build-all-production nx run-many --target=build --all --configuration=production
 abbr --add nx-build-affected-production nx affected --target=build --configuration=production
 
-abbr --add nx-check-all-affected nx affected --targets=build,type-check,lint,test,test-int --parallel --maxParallel=9
-abbr --add nx-check-all nx run-many --all --targets=build,type-check,lint,test,test-int --parallel --maxParallel=9
+abbr --add nx-check-all-affected nx affected --targets=build,type-check,lint,test,test-int --parallel --maxParallel=4
+abbr --add nx-check-all nx run-many --all --targets=build,type-check,lint,test,test-int --parallel --maxParallel=4
 
 
 set -x NX_TUI false
