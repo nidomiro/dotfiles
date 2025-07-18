@@ -24,4 +24,4 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 # load custom extensions / commands
 . "$HOME/.shell/common.sh"
 
-echo UPDATESTARTUPTTY | gpg-connect-agent # GPG SSH "agent refused operation" fix
+echo UPDATESTARTUPTTY | gpg-connect-agent >/dev/null # GPG SSH "agent refused operation" fix
