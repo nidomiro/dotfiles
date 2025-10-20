@@ -46,3 +46,5 @@
 
 [includeIf "gitdir:/"]
     path = ~/.gitconfig.gpgsign
+[rebase]
+	updateRefs = true
