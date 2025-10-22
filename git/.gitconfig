@@ -9,7 +9,7 @@
 	co = checkout
 	me = merge
 	# more safe force push => forcepush only if no changes are made in the remote
-	fpush = push
+	fpush = push --force-with-lease
 
 	spull = "pull --autostash"
 
