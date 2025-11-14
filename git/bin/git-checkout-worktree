@@ -38,8 +38,8 @@ function on_error
     exit 1
 end
 
-# Check if we have exactly two arguments
-if test (count $argv) -ne 1
+# Check if we have more than 1 argument (branch name is required)
+if test (count $argv) -lt 1
     print_usage
     exit 1
 end
