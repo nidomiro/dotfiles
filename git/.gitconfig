@@ -18,7 +18,8 @@
 	clonewt = "!git-clone-worktree"
 
 [core]
-	commentChar = auto
+	commentChar = "#"
+	commentString = "#"
 	autoclrf = input
 	excludesfile = ~/.gitignore
 	editor = vim
