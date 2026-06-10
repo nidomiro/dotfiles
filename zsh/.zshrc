@@ -100,3 +100,5 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/nomad nomad
 
 if [ -e /home/niclas/.nix-profile/etc/profile.d/nix.sh ]; then . /home/niclas/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+export PATH="/usr/local/bin:$PATH"
