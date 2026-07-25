@@ -1,3 +1,5 @@
-if type -q mise
-    mise activate fish | source
+if not type -q mise
+    exit
 end
+
+mise activate fish | source
