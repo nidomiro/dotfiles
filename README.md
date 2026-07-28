@@ -11,6 +11,7 @@ stow -v -R -t ~ shell-common
 stow -v -R -t ~ bash
 stow -v -R -t ~ fish
 stow -v -R -t ~ git
+stow -v -R -t ~ worktrunk
 ```
 
 # MacOS
@@ -22,6 +23,7 @@ stow -v -R -t ~ shell-common
 stow -v -R -t ~ bash
 stow -v -R -t ~ fish
 stow -v -R -t ~ git
+stow -v -R -t ~ worktrunk
 stow -v -R -t ~ zsh
 stow -v -R -t ~ macos
 ```

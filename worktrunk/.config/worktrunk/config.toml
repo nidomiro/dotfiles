@@ -1,0 +1,5 @@
+[projects."github.com/nidomiro/workstation-setup"]
+worktree-path = "{{ repo_path }}/../{{ branch | sanitize }}"
+
+[list]
+json-schema = 2
