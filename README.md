@@ -12,6 +12,8 @@ stow -v -R -t ~ bash
 stow -v -R -t ~ fish
 stow -v -R -t ~ git
 stow -v -R -t ~ worktrunk
+stow -v -R -t ~ fence
+
 ```
 
 # MacOS
@@ -24,6 +26,7 @@ stow -v -R -t ~ bash
 stow -v -R -t ~ fish
 stow -v -R -t ~ git
 stow -v -R -t ~ worktrunk
+stow -v -R -t ~ fence
 stow -v -R -t ~ zsh
 stow -v -R -t ~ macos
 ```
