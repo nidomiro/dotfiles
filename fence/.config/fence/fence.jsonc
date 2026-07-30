@@ -3,7 +3,7 @@
   "extends": "code",
   "filesystem": {
     "allowRead": ["../.bare"],
-    "allowWrite": ["~/.omp/agent/"],
+    "allowWrite": ["~/.omp/"],
   },
   "network": {
     "allowedDomains": ["*.claude.ai", "*.claude.com"],
