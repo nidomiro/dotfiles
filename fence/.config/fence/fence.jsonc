@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/Use-Tusk/fence/main/docs/schema/fence.schema.json",
   "extends": "code",
   "filesystem": {
-    "allowRead": ["../.bare"],
+    "allowRead": ["../.bare", "~/.config/worktrunk/"],
     "allowWrite": ["~/.omp/"],
   },
   "network": {
