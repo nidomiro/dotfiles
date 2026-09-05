@@ -4,8 +4,10 @@
   "filesystem": {
     "allowRead": ["../.bare", "~/.config/worktrunk/"],
     "allowWrite": ["~/.omp/"],
+    "denyRead": ["/var/run/docker.sock"],
+    "denyWrite": ["/var/run/docker.sock"],
   },
   "network": {
-    "allowedDomains": ["*.claude.ai", "*.claude.com"],
+    "allowedDomains": ["*.claude.ai", "*.claude.com", "npm.jsr.io"],
   },
 }

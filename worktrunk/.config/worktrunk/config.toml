@@ -1,5 +1,12 @@
-[projects."github.com/nidomiro/workstation-setup"]
-worktree-path = "{{ repo_path }}/../{{ branch | sanitize }}"
+# worktree-path = "{{ repo_path }}/../{{ branch | sanitize }}"
 
 [list]
 json-schema = 2
+
+[projects."github.com/sisu-connect/sisu-root"]
+[projects."github.com/sisu-connect/sisu-root".pre-start]
+install = "pnpm install"
+
+[projects."github.com/sisu-connect/sisu-root".post-start]
+copy = "wt step copy-ignored"
+build_essentials = "pnpm turbo build --filter=@sisu-connect/eslint-config"
