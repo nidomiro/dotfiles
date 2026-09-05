@@ -4,6 +4,9 @@
 json-schema = 2
 
 [projects."github.com/sisu-connect/sisu-root"]
+[projects."github.com/sisu-connect/sisu-root".step.copy-ignored]
+exclude = ["node_modules/"]
+
 [projects."github.com/sisu-connect/sisu-root".pre-start]
 install = "pnpm install"
 
