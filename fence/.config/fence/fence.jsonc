@@ -3,11 +3,25 @@
   "extends": "code",
   "filesystem": {
     "allowRead": ["../.bare", "~/.config/worktrunk/"],
-    "allowWrite": ["~/.omp/"],
+    "allowWrite": ["~/.omp/", "~/.pi/"],
     "denyRead": ["/var/run/docker.sock"],
     "denyWrite": ["/var/run/docker.sock"],
   },
   "network": {
-    "allowedDomains": ["*.claude.ai", "*.claude.com", "npm.jsr.io"],
+    "allowLocalOutbound": true,
+    "allowLocalOutboundPorts": [11434, 1234, 9222, 8765],
+    "allowedDomains": [
+      "*",
+      "*.claude.ai",
+      "*.claude.com",
+      "npm.jsr.io",
+      "catalog.stencil.so",
+      "coding-intl.dashscope.aliyuncs.com",
+      "api.commandcode.ai",
+      "api.kilo.ai",
+      "zenmux.ai",
+      "api.venice.ai",
+      "hyper.charm.land",
+    ],
   },
 }
