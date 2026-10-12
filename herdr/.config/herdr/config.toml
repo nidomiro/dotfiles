@@ -1,0 +1,10 @@
+onboarding = false
+
+[terminal]
+default_shell = "fish"
+
+[ui]
+status_indicators = "symbols"
+
+[ui.toast]
+delivery = "system"
