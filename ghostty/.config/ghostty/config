@@ -1,0 +1,3 @@
+config-file = ?config-macos
+
+theme = dark:Adwaita Dark,light:Adwaita
