@@ -1,0 +1,12 @@
+.omp/agent/*.db
+.omp/agent/*.db-*
+.omp/agent/.env
+.omp/agent/sessions/
+.omp/agent/terminal-sessions/
+.omp/agent/logs/
+.omp/agent/last-changelog-version
+.omp/agent/extensions/**/node_modules/
+.omp/agent/extensions/orca-*
+.omp/agent/cache/
+.omp/agent/blobs/
+.omp/agent/predict

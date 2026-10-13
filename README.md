@@ -15,6 +15,7 @@ stow -v -R -t ~ worktrunk
 stow -v -R -t ~ fence
 stow -v -R -t ~ herdr
 stow -v -R -t ~ ghostty
+stow -v -R -t ~ omp
 
 ```
 
@@ -34,6 +35,7 @@ stow -v -R -t ~ ghostty
 stow -v -R -t ~ ghostty-macos
 stow -v -R -t ~ zsh
 stow -v -R -t ~ macos
+stow -v -R -t ~ omp
 ```
 
 # enable gpg-sign

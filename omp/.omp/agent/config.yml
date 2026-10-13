@@ -1,0 +1,16 @@
+modelRoles:
+  plan: anthropic/claude-opus-5-5:high
+  commit: anthropic/claude-haiku-4-5:medium
+  tiny: anthropic/claude-haiku-5-5:medium
+  default: anthropic/claude-sonnet-5-5:medium
+symbolPreset: nerd
+theme:
+  light: light
+setupVersion: 2
+dev:
+  autoqaConsent: granted
+composer:
+  shape: band
+hideThinkingBlock: true
+spelling:
+  autocomplete: "off"
