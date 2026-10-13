@@ -3,7 +3,12 @@
   "extends": "code",
   "filesystem": {
     "allowRead": ["../.bare", "~/.config/worktrunk/"],
-    "allowWrite": ["~/.omp/", "~/.pi/"],
+    "allowWrite": [
+      "~/.omp/",
+      "~/workspace/nidomiro.de/dotfiles/omp/.omp",
+      "~/.pi/",
+      "~/.cache/swc-native-1000",
+    ],
     "denyRead": ["/var/run/docker.sock"],
     "denyWrite": ["/var/run/docker.sock"],
   },
