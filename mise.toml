@@ -1,0 +1,17 @@
+[tools]
+gitleaks = "8.30.1"
+
+[tasks.secrets-scan]
+description = "Scan staged changes for secrets (pre-commit)"
+run = "gitleaks protect --staged --redact --verbose"
+
+[tasks.secrets-scan-ci]
+description = "Scan full git history for secrets (CI)"
+run = "gitleaks detect --redact --verbose"
+
+[tasks.setup]
+description = "Install tools and the git pre-commit hook"
+run = [
+  "mise install",
+  "mise generate git-pre-commit --write --task=secrets-scan",
+]

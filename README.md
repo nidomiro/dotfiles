@@ -43,3 +43,26 @@ stow -v -R -t ~ omp
 ```shell
 stow -v -R -t ~ git-gpgsign
 ```
+
+# Secret scanning (gitleaks)
+
+Staged changes are scanned for secrets by a git pre-commit hook, and CI scans the full history
+(`.github/workflows/gitleaks.yml`). Tools and tasks are defined in `mise.toml`.
+
+Once per clone (requires [mise](https://mise.jdx.dev)):
+
+```shell
+mise trust
+mise run setup
+```
+
+This installs `gitleaks` and writes `.git/hooks/pre-commit`, which runs `mise run secrets-scan`.
+Hooks are not part of the repository, so repeat this on every machine.
+
+Scan the whole history manually:
+
+```shell
+mise run secrets-scan-ci
+```
+
+Known false positives go into `.gitleaksignore` (one fingerprint per line).
