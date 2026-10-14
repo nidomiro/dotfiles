@@ -1,0 +1,71 @@
+name: Monitor upstream Fence template
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  monitor-template:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download current upstream template
+        run: bash scripts/update-fence-template.sh
+      - name: Detect template changes
+        id: changes
+        shell: bash
+        run: |
+          snapshot=fence/.config/fence/original-templates/code.jsonc
+          if git diff --quiet -- "$snapshot"; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          template_hash=$(sha256sum "$snapshot" | cut -c1-64)
+          echo "template_hash=$template_hash" >> "$GITHUB_OUTPUT"
+          git diff --no-ext-diff -- "$snapshot" > "$RUNNER_TEMP/fence-template.diff"
+      - name: Create review issue
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY_OWNER: ${{ github.repository_owner }}
+          TEMPLATE_HASH: ${{ steps.changes.outputs.template_hash }}
+        shell: bash
+        run: |
+          marker="fence-template-${TEMPLATE_HASH}"
+          title="Review upstream Fence code template [$marker]"
+          existing=$(gh issue list \
+            --state all \
+            --limit 100 \
+            --search "in:title $marker" \
+            --json title \
+            --jq 'length > 0')
+          if [[ "$existing" == "true" ]]; then
+            echo "An issue already exists for this Fence template revision."
+            exit 0
+          fi
+
+          body_file="$RUNNER_TEMP/fence-template-issue.md"
+          {
+            cat <<'EOF'
+          The checked-in snapshot of Fence's built-in `code` template differs from upstream.
+
+          Review the diff below against `fence/.config/fence/code.jsonc` and port applicable changes into the local profile. If no profile change is needed, note why. Then refresh and commit the snapshot with `bash scripts/update-fence-template.sh` before closing this issue, so the same upstream change is not reported again.
+
+          Upstream source: https://github.com/fencesandbox/fence/blob/main/internal/templates/code.json
+          EOF
+            printf 'Template SHA-256: `%s`\n\n```diff\n' "$TEMPLATE_HASH"
+            cat "$RUNNER_TEMP/fence-template.diff"
+            printf '\n```\n'
+          } > "$body_file"
+
+          gh issue create \
+            --title "$title" \
+            --assignee "$REPOSITORY_OWNER" \
+            --body-file "$body_file"
