@@ -2,6 +2,7 @@
 .omp/agent/*.db-*
 .omp/agent/.env
 .omp/agent/sessions/
+.omp/agent/custom-session-files/
 .omp/agent/terminal-sessions/
 .omp/agent/logs/
 .omp/agent/last-changelog-version
