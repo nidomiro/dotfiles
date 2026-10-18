@@ -3,6 +3,17 @@
 [list]
 json-schema = 2
 
+[aliases]
+tr-branch = """
+url={{ args[0] }}; suffix={{ args[1] | default("") }}
+p=${url#*trello.com/c/}; p=${p%%[?#]*}
+id=${p%%/*}; rest=${p#*/}; num=${rest%%-*}
+echo "TR-$id/$num-${suffix:-${rest#"$num-"}}"
+"""
+tr = 'wt switch --create "$(wt tr-branch {{ args }})"'
+htr = """wt switch --create "$(wt tr-branch {{ args }})" --no-cd --execute herdr -- worktree open --cwd '{{ primary_worktree_path }}' --path '{% raw %}{{
+worktree_path }}{% endraw %}' --focus"""
+
 [projects."github.com/sisu-connect/sisu-root"]
 [projects."github.com/sisu-connect/sisu-root".step.copy-ignored]
 exclude = ["node_modules/"]
