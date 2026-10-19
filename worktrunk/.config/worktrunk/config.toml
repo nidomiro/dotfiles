@@ -5,10 +5,17 @@ json-schema = 2
 
 [aliases]
 tr-branch = """
-url={{ args[0] }}; suffix={{ args[1] | default("") }}
-p=${url#*trello.com/c/}; p=${p%%[?#]*}
-id=${p%%/*}; rest=${p#*/}; num=${rest%%-*}
-echo "TR-$id/$num-${suffix:-${rest#"$num-"}}"
+python3 -c '
+import sys, urllib.parse
+url, suffix = (sys.argv[1:] + [""])[:2]
+p = url.split("trello.com/c/", 1)[-1].split("?")[0].split("#")[0]
+id, _, rest = p.partition("/")
+num, _, slug = rest.partition("-")
+out = urllib.parse.unquote("TR-%s/%s-%s" % (id, num, suffix or slug))
+for a, b in zip("äöüÄÖÜß", ["ae", "oe", "ue", "Ae", "Oe", "Ue", "ss"]):
+    out = out.replace(a, b)
+print(out)
+' {{ args }}
 """
 tr = 'wt switch --create "$(wt tr-branch {{ args }})"'
 htr = """wt switch --create "$(wt tr-branch {{ args }})" --no-cd --execute herdr -- worktree open --cwd '{{ primary_worktree_path }}' --path '{% raw %}{{
