@@ -2,19 +2,32 @@
   "$schema": "https://raw.githubusercontent.com/Use-Tusk/fence/main/docs/schema/fence.schema.json",
   "extends": "./code.jsonc",
   "filesystem": {
-    "allowRead": ["../.bare", "~/.config/worktrunk/"],
+    "allowRead": [
+      "../.bare",
+      "~/.config/worktrunk/"
+    ],
     "allowWrite": [
       "~/.omp/",
       "~/workspace/nidomiro.de/dotfiles/omp/.omp",
       "~/.pi/",
       "~/.cache/swc-native-1000",
     ],
-    "denyRead": ["/var/run/docker.sock"],
-    "denyWrite": ["/var/run/docker.sock"],
+    "denyRead": [
+      "/var/run/docker.sock",
+      "**/secrets/**/*"
+    ],
+    "denyWrite": [
+      "/var/run/docker.sock"
+    ],
   },
   "network": {
     "allowLocalOutbound": true,
-    "allowLocalOutboundPorts": [11434, 1234, 9222, 8765],
+    "allowLocalOutboundPorts": [
+      11434,
+      1234,
+      9222,
+      8765
+    ],
     "allowedDomains": [
       "*",
       "*.claude.ai",
