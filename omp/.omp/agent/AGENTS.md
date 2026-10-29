@@ -3,6 +3,7 @@
 - Do not stage changes (`git add`, `git commit -a`, …) unless the user allowed staging or asked you to commit. `git mv` and `git rm` are fine for moving and deleting files, as long as they stage nothing but the move or deletion itself; leave every other change unstaged.
 - When creating a pull request, always use the repository's PR template (e.g. `.github/pull_request_template.md`) and fill in its sections.
 - Never push changes without the user's explicit approval for that specific push. Approval for one push does not authorize any later push.
+- Do not unstage changes (`git restore --staged`, `git reset`, `git rm --cached`, …) unless the user explicitly tells you to.
 
 # Shell
 
