@@ -13,6 +13,7 @@
 
 - Do not abstract tests to the same level as production code. The tested logic MUST stay visible from the test case itself, without jumping between helper methods.
 - Prefer explicit tests. Some duplication in tests is wanted, up to a point.
+- Assert multiple properties of the same result (object, record, collection, …) in one assertion against the full expected value, not one assertion per property, whenever the language and test framework allow it. Most frameworks abort on the first failed assertion, so split assertions only reveal one mismatch per run; a single structural comparison shows every wrong value in one diff. Ignore irrelevant parts explicitly within that assertion (e.g. via matchers or placeholders) rather than leaving them out. Independent results, or guard assertions needed before further access is safe, may stay separate.
 - Fix bugs with a red-green procedure: first write a test that reproduces the bug and confirm it fails (red), then fix the bug and confirm the test passes (green). Always attempt this before fixing.
 
 # Environment
