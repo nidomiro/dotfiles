@@ -9,6 +9,12 @@
 
 - Commands the user should execute must use fish syntax, unless stated otherwise.
 
+# Testing
+
+- Do not abstract tests to the same level as production code. The tested logic MUST stay visible from the test case itself, without jumping between helper methods.
+- Prefer explicit tests. Some duplication in tests is wanted, up to a point.
+- Fix bugs with a red-green procedure: first write a test that reproduces the bug and confirm it fails (red), then fix the bug and confirm the test passes (green). Always attempt this before fixing.
+
 # Environment
 
 - The agent most likely runs inside a sandbox. Docker failures (e.g. socket access, permissions, networking) may be caused by the sandbox rather than by the project.
