@@ -14,7 +14,8 @@
     ],
     "denyRead": [
       "/var/run/docker.sock",
-      "**/secrets/**/*"
+      "**/secrets/**/*",
+      "~/.terraform.d/credentials.tfrc.json"
     ],
     "denyWrite": [
       "/var/run/docker.sock"
