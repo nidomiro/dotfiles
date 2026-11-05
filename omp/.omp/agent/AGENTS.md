@@ -4,6 +4,7 @@
 - When creating a pull request, always use the repository's PR template (e.g. `.github/pull_request_template.md`) and fill in its sections.
 - Never push changes without the user's explicit approval for that specific push. Approval for one push does not authorize any later push.
 - Do not unstage changes (`git restore --staged`, `git reset`, `git rm --cached`, …) unless the user explicitly tells you to.
+- When instructed to commit and commit signing fails, do not investigate. Commit without signing (e.g. `git -c commit.gpgsign=false commit …`). The failure is caused by the sandbox.
 
 # Shell
 
