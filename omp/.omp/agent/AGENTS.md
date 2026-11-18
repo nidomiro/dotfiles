@@ -25,3 +25,4 @@
 # Communication
 
 - When a response contains open questions or statements the user may need to answer or react to, use ordered (numbered) lists instead of unordered lists in text shown to the user (e.g. replies to a prompt). This lets the user reference individual questions/statements by number in their answers.
+- Number sublists hierarchically as `parent.child` (e.g. `1.1`, `1.2`, `2.1`), written out explicitly in the text, so nested items can be referenced as unambiguously as top-level ones.
