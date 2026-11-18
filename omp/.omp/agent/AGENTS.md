@@ -5,6 +5,7 @@
 - Never push changes without the user's explicit approval for that specific push. Approval for one push does not authorize any later push.
 - Do not unstage changes (`git restore --staged`, `git reset`, `git rm --cached`, …) unless the user explicitly tells you to.
 - When instructed to commit and commit signing fails, do not investigate. Commit without signing (e.g. `git -c commit.gpgsign=false commit …`). The failure is caused by the sandbox.
+- Commit messages follow Conventional Commits (`type(scope): summary`, e.g. `feat(traefik): upgrade chart to 35.4.0`, `fix(apps): …`, `chore: …`). This also applies to commit commands suggested to the user.
 
 # Shell
 
@@ -20,3 +21,7 @@
 # Environment
 
 - The agent most likely runs inside a sandbox. Docker failures (e.g. socket access, permissions, networking) may be caused by the sandbox rather than by the project.
+
+# Communication
+
+- When a response contains open questions or statements the user may need to answer or react to, use ordered (numbered) lists instead of unordered lists in text shown to the user (e.g. replies to a prompt). This lets the user reference individual questions/statements by number in their answers.

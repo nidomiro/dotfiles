@@ -6,10 +6,15 @@ modelRoles:
 symbolPreset: nerd
 theme:
   light: light
-setupVersion: 2
+setupVersion: 3
 dev:
   autoqaConsent: denied
 composer:
   shape: band
 spelling:
   autocomplete: "off"
+claudeResets:
+  autoRedeem5h: "no"
+  autoRedeemWeekly: "no"
+update:
+  auto: false
