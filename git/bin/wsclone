@@ -4,7 +4,7 @@
 #   $WORKSPACE_ROOT/<host-alias>+<owner>[+<subgroup>...]+<repo>/<repo>/
 #
 # Worktrees (e.g. via worktrunk with its default template) are placed alongside it
-# in the same container: .../<container>/<repo>.<branch>/
+# in the same worktree root: .../<wt-root>/<repo>.<branch>/
 #
 # Output: The checkout path goes to stdout; everything else goes to stderr.
 # This makes the following work:  cd (wsclone git@github.com:owner/repo.git)
@@ -47,6 +47,20 @@ Examples:
   cd (wsclone -n git@github.com:max-sixty/worktrunk.git)" >&2
 end
 
+# Renders the fence template (stowed from fence/.config/fence/wt-root.jsonc)
+# into <wt-root>/fence.jsonc. Fence needs absolute paths, so a symlink won't do.
+# An existing file is never overwritten.
+function write_fence_config --argument-names wt_root_dir
+    set -l template ~/.config/fence/wt-root.jsonc
+    set -l target $wt_root_dir/fence.jsonc
+    test -e $target; and return 0
+    if not test -r $template
+        echo "Fence-Template fehlt: $template" >&2
+        return 0
+    end
+    string replace --all __WT_ROOT_DIR__ (path resolve $wt_root_dir) <$template >$target
+end
+
 argparse --stop-nonopt n/dry-run l/local h/help -- $argv
 or begin
     print_usage
@@ -80,8 +94,8 @@ if set -q _flag_local
         exit 2
     end
 
-    set -l container_dir $workspace_root/local$name_separator$local_repo_name
-    set -l checkout_dir $container_dir/$local_repo_name
+    set -l wt_root_dir $workspace_root/local$name_separator$local_repo_name
+    set -l checkout_dir $wt_root_dir/$local_repo_name
 
     if set -q _flag_dry_run
         echo $checkout_dir
@@ -92,9 +106,10 @@ if set -q _flag_local
         exit 1
     end
 
-    mkdir -p $container_dir
+    mkdir -p $wt_root_dir
     and git init $checkout_dir >&2
     or exit 1
+    write_fence_config $wt_root_dir
     echo $checkout_dir
     exit 0
 end
@@ -140,9 +155,9 @@ for alias_entry in $host_alias_map
 end
 
 set -l repo_name $path_segments[-1]
-set -l container_name (string join $name_separator $host_alias $path_segments)
-set -l container_dir $workspace_root/$container_name
-set -l checkout_dir $container_dir/$repo_name
+set -l wt_root_name (string join $name_separator $host_alias $path_segments)
+set -l wt_root_dir $workspace_root/$wt_root_name
+set -l checkout_dir $wt_root_dir/$repo_name
 
 if set -q _flag_dry_run
     echo $checkout_dir
@@ -154,13 +169,15 @@ if test -e $checkout_dir
     exit 1
 end
 
-mkdir -p $container_dir
+mkdir -p $wt_root_dir
 or exit 1
 
 if not git clone $extra_clone_arguments -- $remote_url $checkout_dir >&2
-    # Leeren Container wieder entfernen, damit kein Müll liegen bleibt
-    rmdir $container_dir 2>/dev/null
+    # Leeres Verzeichnis wieder entfernen, damit kein Müll liegen bleibt
+    rmdir $wt_root_dir 2>/dev/null
     exit 1
 end
+
+write_fence_config $wt_root_dir
 
 echo $checkout_dir

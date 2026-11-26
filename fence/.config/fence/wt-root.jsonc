@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Use-Tusk/fence/main/docs/schema/fence.schema.json",
+  // Template for <wt-root>/fence.jsonc, rendered by `wsclone`: the worktree root
+  // placeholder below becomes the absolute worktree root path, so the checkout and
+  // all sibling worktrees are writable.
+  "extends": "@base",
+  "filesystem": {
+    "allowRead": [],
+    "allowWrite": [
+      ".",
+      "__WT_ROOT_DIR__"
+    ],
+    // Git config and hooks are read-only: writing them allows code execution
+    // outside the sandbox (hooks, core.fsmonitor, core.sshCommand, aliases, ...).
+    "denyWrite": [
+      "__WT_ROOT_DIR__/*/.git/config",
+      "__WT_ROOT_DIR__/*/.git/hooks",
+      "__WT_ROOT_DIR__/*/.git/worktrees/*/config.worktree",
+      "__WT_ROOT_DIR__/.bare/config",
+      "__WT_ROOT_DIR__/.bare/hooks",
+      "__WT_ROOT_DIR__/.bare/worktrees/*/config.worktree"
+    ],
+  },
+  "network": {
+    "allowLocalOutbound": true,
+    "allowLocalOutboundPorts": [
+      2375,
+      8888,
+      3000
+    ],
+  },
+}
