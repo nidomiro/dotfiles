@@ -45,7 +45,10 @@
 [worktree]
 	useRelativePaths = true
 
-[includeIf "gitdir:/"]
-    path = ~/.gitconfig.gpgsign
 [rebase]
 	updateRefs = true
+
+[includeIf "gitdir:/"]
+    path = ~/.gitconfig.gpgsign
+[includeIf "gitdir:/"]
+    path = ~/.gitconfig.mms
