@@ -1,0 +1,166 @@
+#!/usr/bin/env fish
+# wsclone – clones a repository into the flat workspace structure:
+#
+#   $WORKSPACE_ROOT/<host-alias>+<owner>[+<subgroup>...]+<repo>/<repo>/
+#
+# Worktrees (e.g. via worktrunk with its default template) are placed alongside it
+# in the same container: .../<container>/<repo>.<branch>/
+#
+# Output: The checkout path goes to stdout; everything else goes to stderr.
+# This makes the following work:  cd (wsclone git@github.com:owner/repo.git)
+
+# ---------------------------------------------------------------------------
+# Configuration
+# ---------------------------------------------------------------------------
+
+# Host aliases: "hostname=alias". Unknown hosts keep their full names.
+set -l host_alias_map \
+    github.com=gh \
+    gitlab.com=gl \
+    git.home.arpa=gitea # ← replace with your Gitea instance's actual hostname
+
+set -l workspace_root ~/workspace
+set -q WORKSPACE_ROOT; and set workspace_root $WORKSPACE_ROOT
+
+# Separator. "+" is not allowed in GitHub, GitLab, or Gitea names.
+set -l name_separator +
+
+# ---------------------------------------------------------------------------
+
+function print_usage
+    echo "Usage:
+  wsclone [-n] <remote-url> [-- <additional git-clone arguments>]
+  wsclone [-n] --local <name>
+
+Options:
+  -n, --dry-run   print only the target path; do not create anything
+  -l, --local     create a new repository without a remote at local+<name>/<name>
+  -h, --help      show this help
+
+Environment:
+  WORKSPACE_ROOT  base directory (default: ~/workspace)
+
+Examples:
+  wsclone git@github.com:niclas/sisu-connect.git
+  wsclone https://gitlab.com/group/subgroup/tool
+  wsclone ssh://git@git.home.arpa:2222/niclas/homelab.git -- --recurse-submodules
+  cd (wsclone -n git@github.com:max-sixty/worktrunk.git)" >&2
+end
+
+argparse --stop-nonopt n/dry-run l/local h/help -- $argv
+or begin
+    print_usage
+    exit 2
+end
+
+if set -q _flag_help
+    print_usage
+    exit 0
+end
+
+if test (count $argv) -lt 1
+    print_usage
+    exit 2
+end
+
+set -l positional_argument $argv[1]
+set -l extra_clone_arguments $argv[2..-1]
+# Remove a leading "--" from the additional arguments
+if test (count $extra_clone_arguments) -gt 0; and test "$extra_clone_arguments[1]" = --
+    set extra_clone_arguments $extra_clone_arguments[2..-1]
+end
+
+# ---------------------------------------------------------------------------
+# Local repository without a remote
+# ---------------------------------------------------------------------------
+if set -q _flag_local
+    set -l local_repo_name $positional_argument
+    if not string match --quiet --regex '^[A-Za-z0-9._-]+$' -- $local_repo_name
+        echo "Ungültiger Name: '$local_repo_name' (erlaubt: A-Z a-z 0-9 . _ -)" >&2
+        exit 2
+    end
+
+    set -l container_dir $workspace_root/local$name_separator$local_repo_name
+    set -l checkout_dir $container_dir/$local_repo_name
+
+    if set -q _flag_dry_run
+        echo $checkout_dir
+        exit 0
+    end
+    if test -e $checkout_dir
+        echo "Existiert bereits: $checkout_dir" >&2
+        exit 1
+    end
+
+    mkdir -p $container_dir
+    and git init $checkout_dir >&2
+    or exit 1
+    echo $checkout_dir
+    exit 0
+end
+
+# ---------------------------------------------------------------------------
+# Parse the remote URL
+#   git@host:owner/repo.git
+#   ssh://git@host:2222/owner/repo.git
+#   https://host[:port]/group/subgroup/repo[.git][/]
+# ---------------------------------------------------------------------------
+set -l remote_url $positional_argument
+set -l url_parts (string match --regex --groups-only \
+    '^(?:[a-z][a-z0-9+.-]*://)?(?:[^@/]+@)?([^/:]+)(?::[0-9]+)?[:/]/?(.+?)(?:\.git)?/?$' -- $remote_url)
+
+if test (count $url_parts) -ne 2
+    echo "Unbekanntes URL-Format: $remote_url" >&2
+    exit 2
+end
+
+set -l host_name (string lower -- $url_parts[1])
+set -l owner_and_repo_path $url_parts[2]
+set -l path_segments (string split / -- $owner_and_repo_path)
+
+if test (count $path_segments) -lt 2
+    echo "URL enthält keinen Owner: $remote_url" >&2
+    exit 2
+end
+
+for path_segment in $path_segments
+    if string match --quiet -- "*$name_separator*" $path_segment
+        echo "Pfadsegment '$path_segment' enthält das Trennzeichen '$name_separator'" >&2
+        exit 2
+    end
+end
+
+set -l host_alias $host_name
+for alias_entry in $host_alias_map
+    set -l alias_pair (string split --max 1 = -- $alias_entry)
+    if test "$alias_pair[1]" = "$host_name"
+        set host_alias $alias_pair[2]
+        break
+    end
+end
+
+set -l repo_name $path_segments[-1]
+set -l container_name (string join $name_separator $host_alias $path_segments)
+set -l container_dir $workspace_root/$container_name
+set -l checkout_dir $container_dir/$repo_name
+
+if set -q _flag_dry_run
+    echo $checkout_dir
+    exit 0
+end
+
+if test -e $checkout_dir
+    echo "Existiert bereits: $checkout_dir" >&2
+    exit 1
+end
+
+mkdir -p $container_dir
+or exit 1
+
+if not git clone $extra_clone_arguments -- $remote_url $checkout_dir >&2
+    # Leeren Container wieder entfernen, damit kein Müll liegen bleibt
+    rmdir $container_dir 2>/dev/null
+    exit 1
+end
+
+echo $checkout_dir
