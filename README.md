@@ -36,6 +36,7 @@ stow -v -R -t ~ ghostty-macos
 stow -v -R -t ~ zsh
 stow -v -R -t ~ macos
 stow -v -R -t ~ omp
+stow -v -R -t ~ zed-macos
 ```
 
 # enable gpg-sign

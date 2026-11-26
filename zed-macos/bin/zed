@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+exec "$HOME/Applications/Zed.app/Contents/MacOS/cli" --classic "$@"
