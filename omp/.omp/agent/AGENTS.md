@@ -6,6 +6,7 @@
 - Do not unstage changes (`git restore --staged`, `git reset`, `git rm --cached`, …) unless the user explicitly tells you to.
 - When instructed to commit and commit signing fails, do not investigate. Commit without signing (e.g. `git -c commit.gpgsign=false commit …`). The failure is caused by the sandbox.
 - Commit messages follow Conventional Commits (`type(scope): summary`, e.g. `feat(traefik): upgrade chart to 35.4.0`, `fix(apps): …`, `chore: …`). This also applies to commit commands suggested to the user.
+- When the user asks for a commit message, always print the message itself, including the optional body, as one single code block. Printing only the commit command is not enough. The command may additionally be printed, but is optional.
 
 # Shell
 
@@ -26,3 +27,8 @@
 
 - When a response contains open questions or statements the user may need to answer or react to, use ordered (numbered) lists instead of unordered lists in text shown to the user (e.g. replies to a prompt). This lets the user reference individual questions/statements by number in their answers.
 - Number sublists hierarchically as `parent.child` (e.g. `1.1`, `1.2`, `2.1`), written out explicitly in the text, so nested items can be referenced as unambiguously as top-level ones.
+
+# Formatting
+
+- Before formatting, find the formatter the repo configures (`.oxfmtrc.json`, `.prettierrc*`, `biome.json`, package scripts) and use its script (e.g. `pnpm format:write`) from the repo root. Never run `npx <formatter>` or a globally downloaded formatter: it ignores the repo config and mangles files.
+- After formatting, run the repo's format check (e.g. `pnpm format:check`) to confirm only intended files changed.

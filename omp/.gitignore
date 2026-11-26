@@ -11,3 +11,5 @@
 .omp/agent/cache/
 .omp/agent/blobs/
 .omp/agent/predict
+.omp/agent/codex-client-version.json
+.omp/agent/skill-descriptions.db.lock
