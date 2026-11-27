@@ -41,9 +41,9 @@ Environment:
   WORKSPACE_ROOT  base directory (default: ~/workspace)
 
 Examples:
-  wsclone git@github.com:niclas/sisu-connect.git
+  wsclone git@github.com:nidomiro/KDataLoader.git
   wsclone https://gitlab.com/group/subgroup/tool
-  wsclone ssh://git@git.home.arpa:2222/niclas/homelab.git -- --recurse-submodules
+  wsclone ssh://git@git.home.arpa:2222/nidomiro/homelab.git -- --recurse-submodules
   cd (wsclone -n git@github.com:max-sixty/worktrunk.git)" >&2
 end
 
